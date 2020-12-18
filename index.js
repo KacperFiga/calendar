@@ -59,13 +59,14 @@ const calendar = (date) => {
 
     const domFragment = document.createDocumentFragment();
 
+    lastDays -= lastDayWeek;
+
     for (let i = lastDayWeek; i > 0; i--) {
-      let dayNumber = lastDays;
+      lastDays += 1;
       const day = document.createElement("div");
       day.className = "calendar__day-prev";
-      day.textContent = dayNumber;
+      day.textContent = lastDays;
       domFragment.appendChild(day);
-      dayNumber = -1;
     }
 
     for (let i = 1; i <= daysNumber; i++) {
