@@ -8,6 +8,8 @@ const spnNext = document.querySelector(".next");
 
 const spnPrev = document.querySelector(".prev");
 
+const spnYear = document.querySelector(".calendar__top-bar-year");
+
 let date = new Date();
 
 months = [
@@ -53,13 +55,16 @@ const calendar = (date) => {
     currentWeekDay,
     today,
     lastDays,
-    lastDayWeek
+    lastDayWeek,
+    year
   ) => {
     spnMonthName.textContent = months[monthIndex];
 
     const nextDaysToRender = 7 - currentWeekDay;
 
     const domFragment = document.createDocumentFragment();
+
+    spnYear.textContent = year;
 
     lastDays -= lastDayWeek;
 
@@ -107,7 +112,8 @@ const calendar = (date) => {
       currentWeekDay,
       today,
       lastDays,
-      lastDayWeek
+      lastDayWeek,
+      year
     );
   };
 
