@@ -119,11 +119,11 @@ calendar(date);
 spnNext.addEventListener("click", () => {
   const nextMonthIndex = getMonth(date) + 1;
   date.setMonth(nextMonthIndex);
-  console.log(date);
-  console.log("next");
   calendar(date);
 });
 
 spnPrev.addEventListener("click", () => {
-  console.log("prev");
+  const prevMonthIndex = getMonth(date) - 1;
+  date.setMonth(prevMonthIndex);
+  calendar(date);
 });
