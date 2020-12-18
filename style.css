@@ -46,7 +46,8 @@ body {
   font-size: 1.3rem;
   letter-spacing: 2px;
 }
-.calendar__top-bar-month > span {
+.calendar__top-bar-month > span.prev,
+.calendar__top-bar-month > span.next {
   display: flex;
   justify-content: center;
   align-items: center;
