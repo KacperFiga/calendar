@@ -1,6 +1,10 @@
 const spnMonthName = document.querySelector(".calendar__top-bar-month-name");
 
-const currentMonth = new Date().getMonth();
+const currentDate = new Date();
+
+const currentMonth = currentDate.getMonth();
+
+const currentYear = currentDate.getFullYear();
 
 const calendarBottomBar = document.querySelector(".calendar__bottom-bar");
 
@@ -78,7 +82,7 @@ const calendar = (date) => {
 
     for (let i = 1; i <= daysNumber; i++) {
       const day = document.createElement("div");
-      if (i === today && monthIndex === currentMonth) {
+      if (i === today && monthIndex === currentMonth && currentYear === year) {
         day.className = "calendar__day-today";
       } else day.classList.add("calendar__day");
 
