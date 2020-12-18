@@ -23,78 +23,28 @@ months = [
   "December",
 ];
 
-getMonth = (date) => date.getMonth();
+const getMonth = (date) => date.getMonth();
 
-getYear = (date) => date.getFullYear();
+const calendar = (date) => {
+  calendarBottomBar.textContent = "";
 
-getWeekDay = (date) => date.getDay();
+  getYear = (date) => date.getFullYear();
 
-getMonthDays = (date) => {
-  const year = getYear(date);
-  const month = getMonth(date) + 1;
-  const newDate = new Date(year, month, 0);
-  const days = newDate.getDate();
-  return days;
-};
+  getWeekDay = (date) => date.getDay();
 
-getToday = (date) => date.getDate();
+  getMonthDays = (date) => {
+    const year = getYear(date);
+    const month = getMonth(date) + 1;
+    const newDate = new Date(year, month, 0);
+    const days = newDate.getDate();
+    return days;
+  };
 
-generatePrevMonth = (year, month) => new Date(year, month, 0);
+  getToday = (date) => date.getDate();
 
-render = (
-  monthIndex,
-  months,
-  daysNumber,
-  currentWeekDay,
-  today,
-  lastDays,
-  lastDayWeek
-) => {
-  spnMonthName.textContent = months[monthIndex];
+  generatePrevMonth = (year, month) => new Date(year, month, 0);
 
-  const nextDaysToRender = 7 - currentWeekDay;
-
-  const domFragment = document.createDocumentFragment();
-
-  for (let i = lastDayWeek; i > 0; i--) {
-    let dayNumber = lastDays;
-    const day = document.createElement("div");
-    day.className = "calendar__day-prev";
-    day.textContent = dayNumber;
-    domFragment.appendChild(day);
-    dayNumber = -1;
-  }
-
-  for (let i = 1; i <= daysNumber; i++) {
-    const day = document.createElement("div");
-    if (i == today) {
-      day.className = "calendar__day-today";
-    } else day.classList.add("calendar__day");
-
-    day.textContent = i;
-    domFragment.appendChild(day);
-  }
-
-  for (let i = 1; i <= nextDaysToRender; i++) {
-    const day = document.createElement("div");
-    day.className = "calendar__day-next";
-    day.textContent = i;
-    domFragment.appendChild(day);
-  }
-
-  calendarBottomBar.appendChild(domFragment);
-};
-
-init = () => {
-  const daysNumber = getMonthDays(date);
-  const monthIndex = getMonth(date);
-  const year = getYear(date);
-  const currentWeekDay = getWeekDay(date);
-  const today = getToday(date);
-  const prevMonth = generatePrevMonth(year, monthIndex);
-  const lastDays = getMonthDays(prevMonth);
-  const lastDayWeek = getWeekDay(prevMonth);
-  render(
+  render = (
     monthIndex,
     months,
     daysNumber,
@@ -102,7 +52,75 @@ init = () => {
     today,
     lastDays,
     lastDayWeek
-  );
+  ) => {
+    spnMonthName.textContent = months[monthIndex];
+
+    const nextDaysToRender = 7 - currentWeekDay;
+
+    const domFragment = document.createDocumentFragment();
+
+    for (let i = lastDayWeek; i > 0; i--) {
+      let dayNumber = lastDays;
+      const day = document.createElement("div");
+      day.className = "calendar__day-prev";
+      day.textContent = dayNumber;
+      domFragment.appendChild(day);
+      dayNumber = -1;
+    }
+
+    for (let i = 1; i <= daysNumber; i++) {
+      const day = document.createElement("div");
+      if (i == today) {
+        day.className = "calendar__day-today";
+      } else day.classList.add("calendar__day");
+
+      day.textContent = i;
+      domFragment.appendChild(day);
+    }
+
+    for (let i = 1; i <= nextDaysToRender; i++) {
+      const day = document.createElement("div");
+      day.className = "calendar__day-next";
+      day.textContent = i;
+      domFragment.appendChild(day);
+    }
+
+    calendarBottomBar.appendChild(domFragment);
+  };
+
+  init = () => {
+    const daysNumber = getMonthDays(date);
+    const monthIndex = getMonth(date);
+    const year = getYear(date);
+    const currentWeekDay = getWeekDay(date);
+    const today = getToday(date);
+    const prevMonth = generatePrevMonth(year, monthIndex);
+    const lastDays = getMonthDays(prevMonth);
+    const lastDayWeek = getWeekDay(prevMonth);
+    render(
+      monthIndex,
+      months,
+      daysNumber,
+      currentWeekDay,
+      today,
+      lastDays,
+      lastDayWeek
+    );
+  };
+
+  init();
 };
 
-init();
+calendar(date);
+
+spnNext.addEventListener("click", () => {
+  const nextMonthIndex = getMonth(date) + 1;
+  date.setMonth(nextMonthIndex);
+  console.log(date);
+  console.log("next");
+  calendar(date);
+});
+
+spnPrev.addEventListener("click", () => {
+  console.log("prev");
+});
