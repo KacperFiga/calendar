@@ -53,6 +53,12 @@ body {
   width: 15%;
   height: 90%;
   cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.calendar__top-bar-month > .prev:hover,
+.calendar__top-bar-month > .next:hover {
+  background-color: #753a88;
 }
 
 .calendar__weekdayname {
